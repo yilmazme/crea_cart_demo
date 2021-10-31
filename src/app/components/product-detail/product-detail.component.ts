@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/Product';
+import { ProductService } from 'src/app/services/product.service';
 
 import {PRODUCTS} from "../../../mock-products"
 
@@ -11,18 +12,23 @@ import {PRODUCTS} from "../../../mock-products"
 })
 export class ProductDetailComponent implements OnInit {
 
+  name!:string;
+  id! : number
   product: Product | undefined;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit(): void {
-      // First get the product id from the current route.
   const routeParams = this.route.snapshot.paramMap;
-  const productIdFromRoute = Number(routeParams.get('id'));
+  this.id = Number(routeParams.get('id'));
 
-  // Find the product that correspond with the id provided in route.
-  this.product = PRODUCTS.find(product => product.id === productIdFromRoute);
+  this.productService.getOneProduct(this.id).subscribe((prod)=> this.product=prod)
 
   }
 
+  onSubmit(){
+
+    this.productService.updateProduct(this.id, this.name).subscribe((prod)=>this.product=prod)
+
+  }
 }

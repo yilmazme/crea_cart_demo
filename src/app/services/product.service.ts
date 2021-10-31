@@ -9,11 +9,36 @@ import {PRODUCTS} from "../../mock-products"
 })
 export class ProductService {
 
-  constructor() { }
+  constructor() { 
+    const localProducts = JSON.parse(localStorage.getItem('products') || '[]')
+    if(localProducts.length){
+      // mock data'nın yapılan değişiklikleri değiştirmemesi için
+      return
+    }
+    localStorage.setItem("products",JSON.stringify(PRODUCTS))
+  }
 
 
   getProducts() : Observable<Product[]>{
-    const products = of(PRODUCTS)
+   const localProducts = JSON.parse(localStorage.getItem('products') || '[]')
+    const products = of(localProducts)
     return products;
   }
+  getOneProduct(id:number) : Observable<Product>{
+   const localProducts = JSON.parse(localStorage.getItem('products') || '[]')
+   const oneProduct = localProducts.find((prod: { id: number; })=>prod.id === id)
+    const product = of(oneProduct)
+    return product;
+  }
+
+  updateProduct(id:number, name:string) :Observable<Product>{
+    const filteredProduct = PRODUCTS.filter((prod: { id: number; })=>prod.id === id)[0]
+    filteredProduct.name = name;
+    localStorage.setItem("products",JSON.stringify(PRODUCTS))
+    const product = of(filteredProduct)
+   
+    return product
+
+  }
+
 }

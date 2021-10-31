@@ -18,5 +18,8 @@ products: Product[] = [];
   ngOnInit(): void {
    this.productService.getProducts().subscribe((products)=>this.products=products)
   }
-
+ 
+  // logProduct(prod:Product){
+  //   this.productService.updateProduct(prod)
+  // }
 }

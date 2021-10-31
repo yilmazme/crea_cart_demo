@@ -5,5 +5,15 @@
       <h3>{{ product.name }}</h3>
       <h4>{{ product.price | currency }}</h4>
       <p>{{ product.description }}</p>
+
+      <form (ngSubmit)="onSubmit()" class="add-form">
+        <div class="form-control">
+            <label for="name">Change Name</label>
+            <input type="text" name="name" [(ngModel)]="name" id="name" placeholder="change name">
+        </div>
+    <input type="submit" value="Send" class="btn btn-block btn-success">
+    </form>
     </div>
+
+    
 </div>
