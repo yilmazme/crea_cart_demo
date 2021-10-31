@@ -1,0 +1,9 @@
+.product{
+    display: flex;
+    justify-content: center;
+
+}
+
+.product div{
+    text-align: center;
+}
