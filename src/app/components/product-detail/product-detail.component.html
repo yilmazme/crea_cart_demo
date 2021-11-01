@@ -1,18 +1,18 @@
 <div *ngIf="product" class="product">
-    <div  class="left">
-        <img src={{product.image}} alt={{product.image}}/>
+    <div class="left">
+        <img src={{product.image}} alt={{product.image}} />
         <div class="productInfo">
             <span>
                 <h5>{{ product.name.toUpperCase() }}</h5>
                 <h5>{{ product.price | currency }}</h5>
+            </span>           
+            <span>
+                <p>Comments: {{ product.comments.length }}</p>
+                <p><star-rating [value]=product.rating[0] [totalstars]="totalstars" checkedcolor="gold" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating></p>
             </span>
             <span>
                 <p>Description: {{ product.description }}</p>
                 <p>Arrival Date: {{ product.arrivalDate | date: 'dd/MM/yyyy'}}</p>
-            </span>
-            <span>
-                <p>Comments: {{ product.comments.length }}</p>
-                <p>Rating: {{ product.rating }}</p>
             </span>
         </div>
     </div>
@@ -20,25 +20,40 @@
         <h4>Product Summary</h4>
         <div class="tabs">
             <span (click)="seeDetails()" [ngClass]="showDetails ? 'active' : 'passive'">Details</span>
-            <span  (click)="seeComments()" [ngClass]="showComments ? 'active' : 'passive'">Comments & Rates</span>
+            <span (click)="seeComments()" [ngClass]="showComments ? 'active' : 'passive'">Comments & Rates</span>
         </div>
-        <div  [ngClass]="showDetails ? 'show' : 'hide'">
+        <div class="detail" [ngClass]="showDetails ? 'show' : 'hide'">
             <p>
                 {{product.detail}}
             </p>
         </div>
-        <div [ngClass]="showComments ? 'show' : 'hide'">
-            <p *ngFor="let comment of product.comments" >
-                {{comment}}
-            </p>
-            <form (ngSubmit)="onSubmit()" class="add-form">
-                <div class="form-control">
-                    <label for="name">Change Name</label>
-                    <input type="text" name="name" [(ngModel)]="name" id="name" placeholder="change name">
+        <div class="comments" [ngClass]="showComments ? 'show' : 'hide'">
+            <div class="list-group d-flex w-100 ">
+
+                <a *ngFor="let comment of product.comments" href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <fa-icon [icon]="faUser" [ngStyle]="{'color':'#333'}"></fa-icon>
+                        <small class="text-muted">3 days ago</small>
+                    </div>
+                    <p class="mb-1"> {{comment}}</p>
+                </a>
+            </div>
+            <br>
+            <form (ngSubmit)="onSubmit()" class="add-form w-100 ">
+                <div class=" d-flex w-100">
+                    <label for="comment"></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                     name="comment" [(ngModel)]="comment" id="comment" placeholder="make a comment"
+                     ng-required="true"
+                    ></textarea>
                 </div>
-                <input type="submit" value="Send" class="btn btn-block btn-success">
+                <div class="form-control">
+                    <label for="rate">Rate:</label>
+                    <star-rating [value]="rate" [totalstars]="totalstars" checkedcolor="gold" uncheckedcolor="black" size="24px" [readonly]="false" (rate)="onRate($event)"></star-rating>
+                </div>
+                <input type="submit" value="Send" class="btn btn-block btn-success mt-1" [disabled]="validate">
             </form>
         </div>
-   
+
     </div>
 </div>

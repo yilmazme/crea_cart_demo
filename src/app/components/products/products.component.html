@@ -8,6 +8,8 @@
         <p> {{ product.price | currency }}</p>
       </div>
     </a>
-    <span>{{product.rating[0] | number : '1.1-1' }}</span>
+    <span>
+      <star-rating [value]=product.rating[0] [totalstars]="totalstars" checkedcolor="gold" uncheckedcolor="black" size="24px" [readonly]="readonly" (rate)="onRate($event)"></star-rating>
+    </span>
   </div>
 </div>

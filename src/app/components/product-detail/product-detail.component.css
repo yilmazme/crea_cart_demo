@@ -32,13 +32,29 @@ img{
     height: 80vh;
 }
 .productInfo{
-    padding-top: 10px;
+  padding-top: 10px;
   width: 60%;
 }
 .productInfo span{
 display: flex;
 justify-content: space-between;
 align-items: center;
+}
+.detail{
+  padding-top: 1.2rem;
+  width: 80%;
+}
+.comments{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  padding-top: 1.2rem;
+}
+.comments p{
+  width: 100%;
+  text-align: left;
 }
 .show{
     display: inherit;

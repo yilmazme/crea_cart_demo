@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/Product';
 import { ProductService } from 'src/app/services/product.service';
+import { StarRatingComponent } from 'ng-starrating';
 
 
 
@@ -12,6 +13,8 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductsComponent implements OnInit {
 
 products: Product[] = [];
+totalstars:number=5;
+readonly:boolean=true;
 
   constructor(private productService: ProductService) { }
 
@@ -22,5 +25,12 @@ products: Product[] = [];
     this.products[i].rating = [(this.products[i].rating.reduce((a,b)=>a+b)/this.products[i].rating.length)]
      
    }
+
+  }
+  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+    alert(`Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 }

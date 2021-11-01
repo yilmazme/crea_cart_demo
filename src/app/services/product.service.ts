@@ -31,9 +31,10 @@ export class ProductService {
     return product;
   }
 
-  updateProduct(id:number, name:string) :Observable<Product>{
+  updateProduct(id:number, comment:string, rate:number) :Observable<Product>{
     const filteredProduct = PRODUCTS.filter((prod: { id: number; })=>prod.id === id)[0]
-    filteredProduct.name = name;
+    filteredProduct.comments.unshift(comment)
+    filteredProduct.rating.push(rate)
     localStorage.setItem("products",JSON.stringify(PRODUCTS))
     const product = of(filteredProduct)
    
