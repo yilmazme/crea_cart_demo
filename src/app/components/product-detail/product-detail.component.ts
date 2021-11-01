@@ -42,7 +42,7 @@ export class ProductDetailComponent implements OnInit {
   }
   onSubmit(){
     if(this.comment.length<1){
-    this.alertMessage="Please enter your comment"
+      this.alertMessage="Please enter your comment"
       return
     }
     this.showRating=false;
