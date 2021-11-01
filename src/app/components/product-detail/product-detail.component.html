@@ -8,7 +8,7 @@
             </span>           
             <span>
                 <p>Comments: {{ product.comments.length }}</p>
-                <p><star-rating [value]=product.rating[0] [totalstars]="totalstars" checkedcolor="gold" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating></p>
+                <p><star-rating [value]=product.rating[0] [totalstars]="totalstars" checkedcolor="gold" uncheckedcolor="gray" size="24px" [readonly]="true"></star-rating></p>
             </span>
             <span>
                 <p>Description: {{ product.description }}</p>
@@ -30,13 +30,13 @@
         <div class="comments" [ngClass]="showComments ? 'show' : 'hide'">
             <div class="list-group d-flex w-100 ">
 
-                <a *ngFor="let comment of product.comments" href="#" class="list-group-item list-group-item-action">
+                <span *ngFor="let comment of product.comments" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <fa-icon [icon]="faUser" [ngStyle]="{'color':'#333'}"></fa-icon>
                         <small class="text-muted">3 days ago</small>
                     </div>
                     <p class="mb-1"> {{comment}}</p>
-                </a>
+                </span>
             </div>
             <br>
             <form (ngSubmit)="onSubmit()" class="add-form w-100 ">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-control">
                     <label for="rate">Rate:</label>
-                    <star-rating [value]="rate" [totalstars]="totalstars" checkedcolor="gold" uncheckedcolor="black" size="24px" [readonly]="false" (rate)="onRate($event)"></star-rating>
+                    <star-rating [value]="rate" [totalstars]="totalstars" checkedcolor="gold" uncheckedcolor="gray" size="24px" [readonly]="false" (rate)="onRate($event)"></star-rating>
                 </div>
                 <input type="submit" value="Send" class="btn btn-block btn-success mt-1" [disabled]="validate">
             </form>
