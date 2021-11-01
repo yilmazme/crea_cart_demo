@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,16 @@ export class AppComponent {
 
   faArrowLeft = faArrowLeft;
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   hasRoute(route:string){
     return this.router.url != route;
+  }
+
+  logout(){
+    this.authService.logout()
   }
 }
