@@ -17,9 +17,10 @@ products: Product[] = [];
 
   ngOnInit(): void {
    this.productService.getProducts().subscribe((products)=>this.products=products)
+   for (let i = 0; i < this.products.length; i++) {
+     
+    this.products[i].rating = [(this.products[i].rating.reduce((a,b)=>a+b)/this.products[i].rating.length)]
+     
+   }
   }
- 
-  // logProduct(prod:Product){
-  //   this.productService.updateProduct(prod)
-  // }
 }

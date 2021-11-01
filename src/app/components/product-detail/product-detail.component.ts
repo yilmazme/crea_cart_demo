@@ -15,6 +15,8 @@ export class ProductDetailComponent implements OnInit {
   name!:string;
   id! : number
   product: Product | undefined;
+  showDetails:boolean = true;
+  showComments:boolean = false;
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
@@ -30,5 +32,13 @@ export class ProductDetailComponent implements OnInit {
 
     this.productService.updateProduct(this.id, this.name).subscribe((prod)=>this.product=prod)
 
+  }
+  seeComments(){
+    this.showComments = true;
+    this.showDetails = false;
+  }
+  seeDetails(){
+    this.showDetails = true;
+    this.showComments = false;
   }
 }

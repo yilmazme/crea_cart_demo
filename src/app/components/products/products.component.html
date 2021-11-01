@@ -1,10 +1,13 @@
 <div class="products">
-    <div *ngFor="let product of products">
-        <a
-          [title]="product.name"
-          [routerLink]="['/products', product.id]">
-          <img src={{product.image}} alt={{product.name}} width="300px" height="400px"/>
-        </a>
-     <p> {{ product.name }}</p>  
+  <div *ngFor="let product of products" class="card">
+    <a [title]="product.name" [routerLink]="['/products', product.id]">
+      <img src={{product.image}} alt={{product.name}} width="300px" height="400px" />
+
+      <div class="prodInfo">
+        <p> {{ product.name.toUpperCase() }}</p>
+        <p> {{ product.price | currency }}</p>
+      </div>
+    </a>
+    <span>{{product.rating[0] | number : '1.1-1' }}</span>
   </div>
 </div>
