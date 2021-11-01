@@ -21,9 +21,11 @@ export class ProductDetailComponent implements OnInit {
   showDetails:boolean = true;
   showComments:boolean = false;
   faUser = faUser;
-
+  showRating:boolean=true;
   totalstars:number=5;
   readonly!:string;
+
+  alertMessage=""
 
   validate:boolean=this.comment.length? true:false;
 
@@ -39,8 +41,18 @@ export class ProductDetailComponent implements OnInit {
   
   }
   onSubmit(){
-
-    this.productService.updateProduct(this.id, this.comment, this.rate).subscribe((prod)=>this.product=prod)
+    if(this.comment.length<1){
+    this.alertMessage="Please enter your comment"
+      return
+    }
+    this.showRating=false;
+    this.productService.updateProduct(this.id, this.comment, this.rate).subscribe((prod)=>{
+      prod.rating = [(prod.rating.reduce((a,b)=>a+b)/prod.rating.length)]
+      this.product=prod
+      setTimeout(() => {
+        this.showRating=true;
+      }, 300);
+    })
     this.comment = "";
     this.rate=5;
 
@@ -58,5 +70,7 @@ export class ProductDetailComponent implements OnInit {
   onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
       this.rate=$event.newValue
   }
-
+  setAlertMessage(){
+  this.alertMessage=""
+}
 }

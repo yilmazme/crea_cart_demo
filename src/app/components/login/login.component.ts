@@ -15,17 +15,25 @@ export class LoginComponent implements OnInit {
   username:string="";
   password:string="";
 
+  alertMessage=""
 
-  constructor(private authService: AuthService, private router:Router ) { }
+  constructor(private authService: AuthService, private router:Router ) { 
+    
+  }
 
   ngOnInit(): void {
     if(this.authService.isLoggedIn()){
       this.router.navigate(["products"])
     }
+    
   }
   
 
   onSubmit(){
-    this.authService.login(this.username, this.password).subscribe((res)=>this.router.navigate(["products"]), (error)=>alert(error.message));
+    this.authService.login(this.username, this.password).subscribe((res)=>this.router.navigate(["products"]), (error)=>this.alertMessage=error.message);
+  }
+
+  setAlertMessage(){
+    this.alertMessage=""
   }
 }

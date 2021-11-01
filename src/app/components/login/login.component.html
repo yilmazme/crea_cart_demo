@@ -1,16 +1,30 @@
 <div class="login">
     <form  method="post" (ngSubmit)="onSubmit()">
+        <div
+        *ngIf="alertMessage"
+        class="alert alert-danger alter-dismissable fade show d-flex w-100 justify-content-around align-items-center"
+        role="alert"
+        [ngStyle]="{'zIndex': '5'}"
+      > {{alertMessage}}
+      <button
+        type="button"
+        class="close btn btn-danger btn-sm"
+        (click)="setAlertMessage()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
         <h3 class="text-center">
             <fa-icon [icon]="faLock" [ngStyle]="{'color':'#333'}"></fa-icon>
             Login
         </h3>
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username"  [(ngModel)]="username" class="form-control" placeholder="enter username">
+            <input type="text" name="username" id="username"  [(ngModel)]="username" class="form-control" placeholder="enter username" (focus)="setAlertMessage()">
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" [(ngModel)]="password"  class="form-control" placeholder="enter password">
+            <input type="password" name="password" id="password" [(ngModel)]="password"  class="form-control" placeholder="enter password" (focus)="setAlertMessage()">
         </div>
         <br>
         <button type="submit" class="btn btn-success">Login</button>
