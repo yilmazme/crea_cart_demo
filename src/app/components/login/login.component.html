@@ -20,11 +20,11 @@
         </h3>
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username"  [(ngModel)]="username" class="form-control" placeholder="enter username" (focus)="setAlertMessage()">
+            <input type="text" name="username" id="username"  [(ngModel)]="username" class="form-control" placeholder="enter username" (focus)="setAlertMessage()" required>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" [(ngModel)]="password"  class="form-control" placeholder="enter password" (focus)="setAlertMessage()">
+            <input type="password" name="password" id="password" [(ngModel)]="password"  class="form-control" placeholder="enter password" (focus)="setAlertMessage()" required>
         </div>
         <br>
         <button type="submit" class="btn btn-success">Login</button>

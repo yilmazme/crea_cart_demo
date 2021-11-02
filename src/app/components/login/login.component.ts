@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.username === '' || this.password === '') {
+      this.alertMessage = 'Please fill necessary fields!';
+      return;
+    }
+
     this.authService.login(this.username, this.password).subscribe(
       (res) => this.router.navigate(['products']),
       (error) => (this.alertMessage = error.message)
