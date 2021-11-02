@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/Product';
 import { ProductService } from 'src/app/services/product.service';
-import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +15,9 @@ export class ProductsComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((products) => (this.products = products));
+    this.productService
+      .getProducts()
+      .subscribe((products) => (this.products = products));
     for (let i = 0; i < this.products.length; i++) {
       this.products[i].rating = [
         this.products[i].rating.reduce((a, b) => a + b) /
